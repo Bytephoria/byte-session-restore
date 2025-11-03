@@ -1,0 +1,137 @@
+# =====================================================================
+# ByteSessionRestore - Menu Configuration
+# =====================================================================
+# Defines layout and appearance for all plugin menus.
+# Each menu can be customized for size, titles, icons, and navigation.
+# =====================================================================
+
+menus:
+  main:
+    title: "<gradient:#00fff2:#66ffcc:#b3fff3>⛓ Sessions of {player}</gradient>"
+    size: 5
+
+    # Defines the range of slots used for session type buttons.
+    content:
+      start-slot: 10
+      end-slot: 25
+
+    # Fixed items and navigation buttons.
+    buttons:
+      close:
+        slot: 40
+        material: BARRIER
+        name: "<gradient:#ff6b81:#ff4d6d>✖ Close Menu</gradient>"
+        lore:
+          - "<#a0a0a0>Click to close this menu."
+
+    # Default icons associated with each SessionEventType.
+    session-types:
+      DEATH:
+        material: SKELETON_SKULL
+        name: "<gradient:#ff4d6d:#ff8095>☠ Death Sessions</gradient>"
+        lore:
+          - "<#a0a0a0>View sessions saved when the player died."
+      DISCONNECT:
+        material: OAK_DOOR
+        name: "<gradient:#00ffbf:#80ffe0>🚪 Quit Sessions</gradient>"
+        lore:
+          - "<#a0a0a0>View sessions saved when the player disconnected."
+      CHANGE_WORLD:
+        material: ENDER_PEARL
+        name: "<gradient:#80ffe0:#b3fff3>🌍 World Change Sessions</gradient>"
+        lore:
+          - "<#a0a0a0>View sessions saved when changing worlds."
+      MANUAL:
+        material: BOOK
+        name: "<gradient:#66ffcc:#b3fff3>📘 Manual Sessions</gradient>"
+        lore:
+          - "<#a0a0a0>Sessions saved manually by administrators."
+
+  session-list:
+    title: "<gradient:#00ffbf:#b3fff3>📦 Session Content</gradient>"
+    size: 6
+
+    # Defines the slot range for dynamically generated session items.
+    content:
+      start-slot: 10
+      end-slot: 34
+
+    # Bottom bar navigation buttons.
+    buttons:
+      back:
+        slot: 48
+        material: ARROW
+        name: "<gradient:#80ffe0:#b3fff3>⬅ Back</gradient>"
+        lore:
+          - "<#a0a0a0>Return to the session type menu."
+
+      close:
+        slot: 49
+        material: BARRIER
+        name: "<gradient:#ff6b81:#ff4d6d>✖ Close</gradient>"
+        lore:
+          - "<#a0a0a0>Close this menu."
+
+    # Pagination controls.
+    navigation:
+      previous:
+        slot: 45
+        material: ARROW
+        name: "<gradient:#80ffe0:#b3fff3>◀ Previous Page</gradient>"
+        lore:
+          - "<#a0a0a0>Go back one page."
+      next:
+        slot: 53
+        material: ARROW
+        name: "<gradient:#00ffbf:#66ffcc>▶ Next Page</gradient>"
+        lore:
+          - "<#a0a0a0>Go to the next page."
+
+    # Template for each session item in the list.
+    item:
+      material: BARREL
+      name: "<gradient:#ff4d6d:#ff8080>{type} Session</gradient>"
+      lore:
+        - "<#a0a0a0>Date: <gradient:#00ffbf:#b3fff3>{date}</gradient>"
+        - "<#a0a0a0>Click to view details."
+
+  session-content:
+    title: "<gradient:#00ffbf:#b3fff3>🧰 Snapshot: {snapshot-type}</gradient>"
+    size: 6
+
+    # Control buttons.
+    buttons:
+      back:
+        slot: 45
+        material: ARROW
+        name: "<gradient:#80ffe0:#b3fff3>⬅ Back</gradient>"
+        lore:
+          - "<#a0a0a0>Return to the session list."
+
+      close:
+        slot: 49
+        material: BARRIER
+        name: "<gradient:#ff6b81:#ff4d6d>✖ Close</gradient>"
+        lore:
+          - "<#a0a0a0>Close this menu."
+
+      teleport:
+        slot: 50
+        material: ENDER_EYE
+        name: "<gradient:#00ffbf:#80ffe0>🧭 Go to Location</gradient>"
+        lore:
+          - "<#a0a0a0>Teleport to the stored location."
+
+      restore-inventory:
+        slot: 51
+        material: CHEST
+        name: "<gradient:#80ffe0:#b3fff3>📦 Restore Inventory</gradient>"
+        lore:
+          - "<#a0a0a0>Restores only the player's inventory items."
+
+      restore-session:
+        slot: 52
+        material: CHEST_MINECART
+        name: "<gradient:#00ffbf:#66ffcc>💾 Restore Session</gradient>"
+        lore:
+          - "<#a0a0a0>Restores the entire player state (inventory, experience, health, etc.)"

@@ -1,0 +1,65 @@
+# =====================================================================
+# ByteSessionRestore - Main Configuration
+# =====================================================================
+# Defines how player sessions are stored, managed, and cleaned.
+# All sections are organized for readability and easy modification.
+# =====================================================================
+
+storage:
+  # Database type currently in use.
+  # Options:
+  #  - H2
+  type: H2
+
+  # Connection pool configuration for the database.
+  pool:
+    connection-timeout: 5000    # Maximum time (ms) to wait for a connection before failing.
+    max-lifetime: 1800000       # Maximum lifetime (ms) of a database connection.
+    max-pool-size: 10           # Maximum number of active connections.
+    min-idle: 1                 # Minimum number of idle connections kept ready.
+
+  # -----------------------------------------------------------
+  # Credentials used by external SQL engines (MySQL, MariaDB).
+  # Ignored when using embedded H2 storage.
+  # -----------------------------------------------------------
+  credentials:
+    host: localhost               # Database host or IP address.
+    port: 3306                    # Default port (MySQL/MariaDB: 3306).
+    database: "bytesessionstore"  # Database name.
+    username: "root"              # Database username.
+    password: "ilovefory"         # Database password.
+    use-ssl: "false"              # Whether to use SSL/TLS for the connection.
+
+  # H2 database configuration (used for local file-based storage).
+  h2:
+    file: data/sessions           # Path where the H2 database file is stored.
+
+# -----------------------------------------------------------
+# Global plugin configuration that affects all features.
+# -----------------------------------------------------------
+settings:
+  # Defines the format engine for messages (chat and console).
+  # Options:
+  #  - MINI_MESSAGE : <gray>, <gradient:...>, etc.
+  #  - LEGACY_AMPERSAND : &a, &l, etc.
+  serializer: MINI_MESSAGE
+
+# -----------------------------------------------------------
+# Defines how player sessions are saved, compressed, and cleaned up.
+# -----------------------------------------------------------
+session:
+
+  # Whether to skip saving sessions if the player has an empty inventory and armor.
+  ignore-empty-inventory: true
+
+  # Maximum number of sessions to keep per event type (e.g., death, quit, world change).
+  # Older sessions are automatically removed when the limit is exceeded.
+  max-per-type: 50
+
+  # Compression algorithm used when saving session data.
+  # Options: NONE, ZSTD
+  compression: ZSTD
+
+  # Interval (in seconds) at which old sessions are automatically cleaned up.
+  # Each cycle checks all players and removes sessions exceeding the per-type limit.
+  cleanup-interval-seconds: 12000

@@ -1,0 +1,44 @@
+# =====================================================================
+# ByteSessionRestore - Messages
+# =====================================================================
+# Defines all in-game messages displayed by the plugin.
+# Messages support MiniMessage or LegacyAmpersand formatting
+# depending on the serializer configured in config.yml -> settings.serializer.
+# =====================================================================
+
+# Help command output (shown when running "/bsr help" or no arguments).
+help:
+  - '       <gradient:#00fff2:#66ffcc:#b3fff3><bold>ByteSessionRestore</bold></gradient>'
+  - ''
+  - <gradient:#80ffe0:#b3fff3>/bsr view <yellow><player></yellow></gradient> - <#a0a0a0>View saved sessions for a player.</#a0a0a0>
+  - <gradient:#80ffe0:#b3fff3>/bsr save <yellow><player></yellow></gradient> - <#a0a0a0>Manually save a session for a player.</#a0a0a0>
+  - <gradient:#80ffe0:#b3fff3>/bsr save <yellow>all</yellow></gradient> - <#a0a0a0>Save sessions for all online players.</#a0a0a0>
+  - <gradient:#80ffe0:#b3fff3>/bsr reload</gradient> - <#a0a0a0>Reload all configuration files.</#a0a0a0>
+  - ''
+  - <#a0a0a0>Each command requires the corresponding permission node.</#a0a0a0>
+
+# Messages displayed during configuration reload.
+reload:
+  start: "<gray>Reloading configuration files...</gray>"
+  success: "<green>All configurations have been reloaded successfully.</green>"
+
+# General validation and error responses.
+no-permission: "<red>You do not have permission to perform this action.</red>"
+player-only: "<red>This command can only be executed by a player.</red>"
+unknown-command: "<red>Unknown command. Use <yellow>/bsr help</yellow> for usage information.</red>"
+invalid-target: "<red>The specified player is offline or does not exist.</red>"
+
+# Session restoration messages.
+restore:
+  success: "<green>Session restored successfully.</green>"
+  inventory-only: "<green>Inventory restored successfully.</green>"
+  teleport: "<green>Teleport completed successfully.</green>"
+
+# Menu-related messages.
+menu:
+  no-sessions: "<red>No sessions found for this player.</red>"
+
+# Session creation messages.
+session-create:
+  manual: "<yellow>Manual session saved successfully for <white>{player}</white>.</yellow>"
+  manual-all: "<green>Manual sessions have been saved for all online players.</green>"
