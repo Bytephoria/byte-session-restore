@@ -1,5 +1,6 @@
 package team.bytephoria.bytesessionrestore.platform.paper;
 
+import org.bstats.bukkit.Metrics;
 import org.bukkit.command.defaults.BukkitCommand;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -30,6 +31,8 @@ public final class PaperPlugin extends JavaPlugin {
     private ComponentSerializerAdapter componentSerializerAdapter;
     private Messenger messenger;
     private PlatformSessionCreator platformSessionCreator;
+
+    private Metrics metrics;
 
     @Override
     public void onLoad() {
@@ -74,6 +77,8 @@ public final class PaperPlugin extends JavaPlugin {
                 this.bootstrap.applicationFacade().userSessionService()
         );
 
+        this.metrics = new Metrics(this, 27838);
+
         this.getLogger().info("[ByteSessionRestore] Plugin enabled successfully.");
     }
 
@@ -87,6 +92,7 @@ public final class PaperPlugin extends JavaPlugin {
         }
 
         AsyncExecutor.shutdown();
+        this.metrics.shutdown();
 
         this.platformSessionCreator = null;
         this.messenger = null;

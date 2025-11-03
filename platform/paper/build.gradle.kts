@@ -31,6 +31,7 @@ dependencies {
     implementation(files("libraries/common-2.0.0.jar"))
     implementation(files("libraries/item-2.0.0.jar"))
     implementation(files("libraries/layout-2.0.0.jar"))
+    implementation("org.bstats:bstats-bukkit:3.0.2")
 
     // Runtime libraries included in plugin
     paperLibrary("com.github.luben:zstd-jni:1.5.7-5")
