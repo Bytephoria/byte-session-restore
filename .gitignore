@@ -1,4 +1,5 @@
 .gradle
 .idea
 build
+platform/paper/run
 platform/paper/libraries
