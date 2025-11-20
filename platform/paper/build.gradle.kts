@@ -1,6 +1,7 @@
 plugins {
     id("com.gradleup.shadow") version ("9.1.0")
     id("de.eldoria.plugin-yml.paper") version ("0.8.0")
+    id("xyz.jpenilla.run-paper") version ("3.0.2")
 }
 
 repositories {
@@ -63,6 +64,10 @@ tasks {
         archiveBaseName.set(paper.name)
         archiveVersion.set(rootProject.version.toString())
         archiveClassifier.set(project.name)
+    }
+
+    runServer {
+        minecraftVersion("1.21.10")
     }
 
 }
