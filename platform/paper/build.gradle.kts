@@ -61,6 +61,9 @@ tasks {
     }
 
     shadowJar {
+
+        relocate("org.bstats", "team.bytephoria.bstats")
+
         archiveBaseName.set(paper.name)
         archiveVersion.set(rootProject.version.toString())
         archiveClassifier.set(project.name)
