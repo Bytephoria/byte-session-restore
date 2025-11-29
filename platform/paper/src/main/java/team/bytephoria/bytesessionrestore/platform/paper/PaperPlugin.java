@@ -15,7 +15,6 @@ import team.bytephoria.bytesessionrestore.infra.config.MessagesConfiguration;
 import team.bytephoria.bytesessionrestore.platform.paper.component.adapter.ComponentSerializerAdapter;
 import team.bytephoria.bytesessionrestore.platform.paper.component.adapter.ComponentSerializerFactory;
 import team.bytephoria.bytesessionrestore.platform.paper.messages.Messenger;
-import team.bytephoria.bytesessionrestore.platform.paper.session.PlatformSessionCreator;
 import team.bytephoria.layout.layouts.Layout;
 
 import java.io.File;
@@ -30,7 +29,6 @@ public final class PaperPlugin extends JavaPlugin {
 
     private ComponentSerializerAdapter componentSerializerAdapter;
     private Messenger messenger;
-    private PlatformSessionCreator platformSessionCreator;
 
     private Metrics metrics;
 
@@ -44,8 +42,8 @@ public final class PaperPlugin extends JavaPlugin {
         this.componentSerializerAdapter = ComponentSerializerFactory.createAdapter(
                 this.configuration.settings().serializer()
         );
-        this.messenger = new Messenger(this.componentSerializerAdapter);
 
+        this.messenger = new Messenger(this.componentSerializerAdapter);
         this.bootstrap = new PaperBootstrap(this, bootstrapContext);
         this.bootstrap.load();
 
@@ -72,11 +70,6 @@ public final class PaperPlugin extends JavaPlugin {
             return;
         }
 
-        this.platformSessionCreator = new PlatformSessionCreator(
-                this.configuration(),
-                this.bootstrap.applicationFacade().userSessionService()
-        );
-
         this.metrics = new Metrics(this, 27838);
 
         this.getLogger().info("[ByteSessionRestore] Plugin enabled successfully.");
@@ -94,7 +87,6 @@ public final class PaperPlugin extends JavaPlugin {
         AsyncExecutor.shutdown();
         this.metrics.shutdown();
 
-        this.platformSessionCreator = null;
         this.messenger = null;
         this.componentSerializerAdapter = null;
         this.menuConfiguration = null;
@@ -142,10 +134,6 @@ public final class PaperPlugin extends JavaPlugin {
     ) {
         final File file = new File(this.getDataFolder(), fileName);
         return ConfigurationLoader.loadConfiguration(file.toString(), type, copyFromResources);
-    }
-
-    public @NotNull PlatformSessionCreator platformSessionCreator() {
-        return this.platformSessionCreator;
     }
 
     public @NotNull Configuration configuration() {

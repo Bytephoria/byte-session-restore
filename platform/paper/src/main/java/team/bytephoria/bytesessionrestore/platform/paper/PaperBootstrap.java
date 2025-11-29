@@ -35,8 +35,12 @@ public final class PaperBootstrap implements PluginLifecycle {
     private StorageConnection storageConnection;
     private UserStorage userStorage;
     private ApplicationFacade applicationFacade;
+    private PlatformSessionCreator platformSessionCreator;
 
-    public PaperBootstrap(final @NotNull PaperPlugin paperPlugin, final @NotNull BootstrapContext context) {
+    public PaperBootstrap(
+            final @NotNull PaperPlugin paperPlugin,
+            final @NotNull BootstrapContext context
+    ) {
         this.paperPlugin = paperPlugin;
         this.context = context;
     }
@@ -75,6 +79,11 @@ public final class PaperBootstrap implements PluginLifecycle {
         this.storageConnection.connect();
         this.logger().info("[ByteSessionRestore] Storage connection established.");
 
+        this.platformSessionCreator = new PlatformSessionCreator(
+                this.paperPlugin.configuration(),
+                this.applicationFacade.userSessionService()
+        );
+
         this.registerListeners();
         this.registerCommands();
         this.scheduleCleanupTask();
@@ -94,6 +103,7 @@ public final class PaperBootstrap implements PluginLifecycle {
             this.logger().info("[ByteSessionRestore] Storage connection closed.");
         }
 
+        this.platformSessionCreator = null;
         this.storageConnection = null;
         this.userStorage = null;
         this.applicationFacade = null;
@@ -143,12 +153,10 @@ public final class PaperBootstrap implements PluginLifecycle {
     }
 
     private void registerListeners() {
-        final PlatformSessionCreator sessionCreator = this.paperPlugin.platformSessionCreator();
-
         this.paperPlugin.registerListeners(
-                new PlayerQuitListener(sessionCreator),
-                new PlayerDeathListener(sessionCreator),
-                new PlayerChangedWorldListener(sessionCreator)
+                new PlayerQuitListener(this.platformSessionCreator),
+                new PlayerDeathListener(this.platformSessionCreator),
+                new PlayerChangedWorldListener(this.platformSessionCreator)
         );
 
         this.logger().info("[ByteSessionRestore] Listeners registered successfully.");
@@ -168,6 +176,10 @@ public final class PaperBootstrap implements PluginLifecycle {
         );
 
         this.logger().info("[ByteSessionRestore] Commands registered successfully.");
+    }
+
+    public PlatformSessionCreator platformSessionCreator() {
+        return this.platformSessionCreator;
     }
 
     public StorageConnection storageConnection() {
