@@ -36,7 +36,7 @@ menus:
         name: "<gradient:#00ffbf:#80ffe0>🚪 Quit Sessions</gradient>"
         lore:
           - "<#a0a0a0>View sessions saved when the player disconnected."
-      CHANGE_WORLD:
+      WORLD_CHANGE:
         material: ENDER_PEARL
         name: "<gradient:#80ffe0:#b3fff3>🌍 World Change Sessions</gradient>"
         lore:
